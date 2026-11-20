@@ -1,0 +1,1351 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Dossier OléoCollect</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Parcours en dix temps : le besoin, les règles, la machine, le produit, la fabrication, la nomenclature, les partenaires */
+:root{
+  --bg:#f5f6f2; --surface:#ffffff; --surface-2:#eceee7; --surface-3:#e2e5dc;
+  --fg:#16211f; --muted:#5e6b64; --line:#d7dcd2; --line-strong:#bcc5b8;
+  --accent:#b9770e; --accent-ink:#8a5807; --accent-tint:rgba(185,119,14,.10);
+  --eau:#2d7d9a; --eau-tint:rgba(45,125,154,.10);
+  --good:#2f8f6b; --warn:#c98a1b; --crit:#c0503f;
+  --m-bati:#3b6ea5; --m-rec:#c98a1b; --m-dec:#2f8f6b; --m-pomp:#c0503f; --m-sto:#6b5bbd; --m-cmd:#1f8fa8;
+  --fam-pf:#b9770e; --fam-sf:#3b6ea5; --fam-mp:#5e6b64;
+  --font-display:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Consolas,monospace;
+  --shadow:0 1px 2px rgba(22,33,31,.06),0 10px 28px -14px rgba(22,33,31,.20);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1412; --surface:#171d1a; --surface-2:#1e2622; --surface-3:#26302b;
+  --fg:#e9ede8; --muted:#9caba2; --line:#2a332e; --line-strong:#3a463f;
+  --accent:#e2a33e; --accent-ink:#f0bd68; --accent-tint:rgba(226,163,62,.13);
+  --eau:#5cb3d1; --eau-tint:rgba(92,179,209,.12);
+  --good:#45b188; --warn:#e2a33e; --crit:#e07a66;
+  --m-bati:#6a9fd4; --m-rec:#e2a33e; --m-dec:#45b188; --m-pomp:#e07a66; --m-sto:#9b8ded; --m-cmd:#43b6cf;
+  --fam-pf:#e2a33e; --fam-sf:#6a9fd4; --fam-mp:#9caba2;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -16px rgba(0,0,0,.75);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0f1412; --surface:#171d1a; --surface-2:#1e2622; --surface-3:#26302b;
+  --fg:#e9ede8; --muted:#9caba2; --line:#2a332e; --line-strong:#3a463f;
+  --accent:#e2a33e; --accent-ink:#f0bd68; --accent-tint:rgba(226,163,62,.13);
+  --eau:#5cb3d1; --eau-tint:rgba(92,179,209,.12);
+  --good:#45b188; --warn:#e2a33e; --crit:#e07a66;
+  --m-bati:#6a9fd4; --m-rec:#e2a33e; --m-dec:#45b188; --m-pomp:#e07a66; --m-sto:#9b8ded; --m-cmd:#43b6cf;
+  --fam-pf:#e2a33e; --fam-sf:#6a9fd4; --fam-mp:#9caba2;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -16px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:12;background:var(--surface)}
+.band{width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:60px}
+h1,h2,h3,h4{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.16}
+h1{font-size:clamp(29px,5.2vw,48px);font-weight:700;letter-spacing:-.025em}
+h2{font-size:clamp(22px,3.2vw,30px);font-weight:600;letter-spacing:-.015em}
+h3{font-size:16.5px;font-weight:600}
+h4{font-size:14px;font-weight:600}
+p{margin:0}
+a{color:var(--accent-ink)}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.lede{color:var(--muted);max-width:66ch;font-size:15.5px}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.stack{display:flex;flex-direction:column}
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}.gap-20{gap:20px}.gap-28{gap:28px}
+.sec-head{display:flex;flex-direction:column;gap:11px;margin-bottom:30px;max-width:72ch}
+.sec-num{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.14em}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--surface);border-bottom:1px solid var(--line)}
+.topbar{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:9px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:700;letter-spacing:-.01em}
+.brand .dot{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#f3c66a,var(--accent) 60%,#6b4406);box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+nav.jump{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto}
+nav.jump a{font-size:12.5px;color:var(--muted);text-decoration:none;padding:5px 9px;border-radius:7px;transition:background .18s,color .18s}
+nav.jump a:hover{background:var(--surface-2);color:var(--fg)}
+nav.jump a[aria-current=true]{color:var(--accent-ink);background:var(--accent-tint);font-weight:600}
+.theme-btn{border:1px solid var(--line);background:var(--surface-2);color:var(--muted);border-radius:7px;padding:5px 9px;font:inherit;font-size:12.5px;cursor:pointer}
+.theme-btn:hover{color:var(--fg)}
+.progress{position:fixed;left:0;top:env(safe-area-inset-top,0px);height:2px;background:var(--accent);width:0;z-index:13}
+
+.hero{background:radial-gradient(900px 460px at 86% -10%,var(--accent-tint),transparent 68%),linear-gradient(180deg,var(--surface),var(--bg));border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;gap:30px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:920px){.hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:44px;align-items:center}}
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+@media(min-width:560px){.figs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.fig{background:var(--surface);padding:13px 14px;min-width:0}
+.fig b{display:block;font-family:var(--font-display);font-size:clamp(19px,2.6vw,25px);font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fig span{font-size:11.5px;color:var(--muted);line-height:1.35;display:block;margin-top:2px}
+.kitchen{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px;box-shadow:var(--shadow)}
+.kitchen svg{display:block;width:100%;height:auto}
+
+.cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,228px),1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:17px;min-width:0;display:flex;flex-direction:column;gap:9px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.card p{font-size:13.5px;color:var(--muted)}
+.card ul{margin:0;padding-left:17px;font-size:13.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.rule{width:26px;height:3px;border-radius:2px;background:var(--accent)}
+.callout{border-left:3px solid var(--accent);background:var(--accent-tint);border-radius:0 11px 11px 0;padding:14px 17px;font-size:13.5px}
+.callout b{font-family:var(--font-display)}
+.qa{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.qa .q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.qa .q h4{color:var(--accent-ink)}
+.qa .q p{font-size:13.5px;color:var(--muted)}
+
+.viewer{border:1px solid var(--line);border-radius:15px;background:radial-gradient(72% 58% at 50% 74%,var(--surface-2),var(--surface) 72%);box-shadow:var(--shadow);overflow:hidden}
+.stage{position:relative;width:100%;height:380px;touch-action:none;cursor:grab}
+.stage.dragging{cursor:grabbing}
+@media(min-width:900px){.stage{height:500px}}
+.stage canvas{display:block;width:100%;height:100%}
+.stage-hint{position:absolute;left:13px;bottom:10px;font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);pointer-events:none}
+.badge-3d{position:absolute;right:13px;top:11px;pointer-events:none;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 9px}
+.live{position:absolute;left:13px;top:11px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 13px 5px 9px;font-size:12.5px;max-width:calc(100% - 26px)}
+.live .led{width:9px;height:9px;border-radius:50%;flex:none;background:var(--good)}
+.live b{font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-weight:600}
+.controls{border-top:1px solid var(--line);background:var(--surface);padding:12px 14px;display:flex;flex-direction:column;gap:11px}
+.ctl-row{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.ctl-row label{font-size:12.5px;color:var(--muted);white-space:nowrap}
+input[type=range]{flex:1 1 130px;min-width:100px;accent-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:12.5px;padding:6px 11px;border:0;background:var(--surface-2);color:var(--muted);cursor:pointer;transition:background .18s,color .18s}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff}
+.btn{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);border-radius:8px;padding:6px 12px;cursor:pointer}
+.btn:hover{border-color:var(--line-strong)}
+.chip{font:inherit;font-size:12px;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--fg);border-radius:999px;padding:5px 11px 5px 8px;display:inline-flex;align-items:center;gap:7px;transition:border-color .18s,background .18s}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--c);display:inline-block;flex:none}
+.chip[aria-pressed=true]{border-color:var(--c);background:color-mix(in srgb,var(--c) 15%,var(--surface));font-weight:600}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+
+.steps{display:grid;gap:10px}
+.step-btn{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;text-align:left;font:inherit;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .2s,background .2s;min-width:0;color:inherit}
+.step-btn:hover{border-color:var(--line-strong)}
+.step-btn[aria-pressed=true]{border-color:var(--c);background:color-mix(in srgb,var(--c) 7%,var(--surface));box-shadow:inset 3px 0 0 var(--c)}
+.step-btn .n{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:#fff;background:var(--c)}
+.step-btn h4{margin-bottom:3px}
+.step-btn p{font-size:13px;color:var(--muted)}
+.step-btn .code{font-family:var(--font-mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em;display:block;margin-top:5px}
+.split{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:940px){.split{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:26px;align-items:start}}
+
+.prod{display:grid;gap:15px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.p-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .2s,border-color .2s}
+.p-card:hover{transform:translateY(-2px);border-color:var(--line-strong)}
+.p-top{padding:16px;display:flex;gap:14px;align-items:flex-start}
+.p-code{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--accent-ink)}
+.p-body{padding:0 16px 16px;display:flex;flex-direction:column;gap:9px}
+.specs{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--font-mono);font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:2.5px 8px;color:var(--muted);white-space:nowrap}
+.tag.pf{color:var(--fam-pf);border-color:color-mix(in srgb,var(--fam-pf) 40%,var(--line))}
+.tag.sf{color:var(--fam-sf);border-color:color-mix(in srgb,var(--fam-sf) 40%,var(--line))}
+
+.legend{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.lv{font-family:var(--font-mono);font-size:11px;border-radius:6px;padding:3px 8px;border:1px solid var(--line);color:var(--muted)}
+.tree{list-style:none;margin:0;padding:0}
+.tree ul{list-style:none;margin:0 0 0 9px;padding:0 0 0 clamp(10px,2.2vw,20px);border-left:1px dashed var(--line-strong)}
+.node{display:grid;grid-template-columns:18px auto minmax(0,1fr);gap:9px;align-items:baseline;padding:5px 8px;border-radius:8px;min-width:0}
+.node:hover{background:var(--surface-2)}
+.node .tgl{width:18px;height:18px;border:1px solid var(--line);background:var(--surface);border-radius:5px;font:inherit;font-size:11px;line-height:1;color:var(--muted);cursor:pointer;padding:0;display:grid;place-items:center;align-self:center}
+.node .leafdot{width:18px;display:grid;place-items:center;align-self:center}
+.node .leafdot i{width:5px;height:5px;border-radius:50%;background:var(--line-strong);display:block}
+.n-code{font-family:var(--font-mono);font-size:12px;font-weight:600;white-space:nowrap}
+.n-main{min-width:0;display:flex;flex-direction:column;gap:2px}
+.n-top{display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.n-des{font-size:13.5px}
+.n-role{font-size:12px;color:var(--muted)}
+.pill{font-family:var(--font-mono);font-size:10.5px;border-radius:999px;padding:1.5px 7px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.q{background:var(--surface-2);color:var(--fg);font-weight:600}
+.pill.f{border-color:color-mix(in srgb,var(--accent) 35%,var(--line));color:var(--accent-ink)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:880px}
+th,td{text-align:left;padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);position:sticky;top:0}
+tbody tr:hover{background:var(--surface-2)}
+td.c-code{font-family:var(--font-mono);font-size:11.5px;font-weight:600;white-space:nowrap}
+td.c-q{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+tr[data-k=PF]{background:var(--accent-tint)}
+
+.rules{display:grid;gap:12px}
+.rule-row{display:grid;gap:12px;grid-template-columns:minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+@media(min-width:760px){.rule-row{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;align-items:start;gap:18px}}
+.rule-row h4{margin-bottom:3px}
+.rule-row p{font-size:13.5px;color:var(--muted)}
+.rule-row .ok{font-size:13px;border-left:2px solid var(--good);padding-left:11px}
+.ref{font-family:var(--font-mono);font-size:10.5px;color:var(--muted)}
+
+.flow{display:grid;gap:11px;grid-template-columns:repeat(auto-fit,minmax(min(100%,148px),1fr))}
+.fstep{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.fstep .st-n{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:.09em}
+.fstep h4{font-size:13.5px}
+.fstep p{font-size:12.5px;color:var(--muted)}
+.fstep.dep{background:linear-gradient(180deg,var(--surface-2),var(--surface));border-color:var(--line-strong)}
+.dep-cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,265px),1fr))}
+.dep-card{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.dep-head{padding:13px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:var(--surface-2);flex-wrap:wrap}
+.dep-head .code{font-family:var(--font-display);font-weight:700;font-size:17px}
+.dep-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;font-size:13px;color:var(--muted)}
+.dep-io{display:flex;gap:7px;flex-wrap:wrap;font-size:11.5px}
+
+.src-list{display:flex;flex-direction:column;gap:7px;margin:0;padding:0;list-style:none}
+.src-list li{display:grid;grid-template-columns:auto 1fr;gap:9px;font-size:13px;align-items:baseline}
+.src-list .k{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;border-radius:5px;padding:2px 6px;white-space:nowrap}
+.k.doc{background:color-mix(in srgb,var(--good) 15%,var(--surface));color:var(--good);border:1px solid color-mix(in srgb,var(--good) 32%,transparent)}
+.k.hyp{background:color-mix(in srgb,var(--warn) 15%,var(--surface));color:var(--accent-ink);border:1px solid color-mix(in srgb,var(--warn) 32%,transparent)}
+.k.td{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.two-col{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.checks{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.check{display:grid;grid-template-columns:16px 1fr;gap:9px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:12.5px;text-decoration:none;color:var(--muted)}
+.check:hover{border-color:var(--accent);color:var(--fg)}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+.foot{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:26px;font-size:12.5px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="progress" id="prog" aria-hidden="true"></div>
+<header class="top">
+  <div class="topbar">
+    <div class="brand"><span class="dot" aria-hidden="true"></span>OléoCollect</div>
+    <nav class="jump" aria-label="Sections">
+      <a href="#besoin">Le besoin</a>
+      <a href="#regles">Les règles</a>
+      <a href="#machine">La machine</a>
+      <a href="#choix">Les choix</a>
+      <a href="#gamme">Ce qu'on vend</a>
+      <a href="#fabrication">Fabrication</a>
+      <a href="#nomenclature">Nomenclature</a>
+      <a href="#partenaires">Clients, fournisseurs</a>
+      <a href="#depots">Dépôts</a>
+      <a href="#sources">Sources</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button">Thème</button>
+  </div>
+</header>
+
+<section class="band hero" id="besoin">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="stack gap-28">
+        <div class="stack gap-16">
+          <p class="eyebrow">Gestion de la technologie et ERP · dossier de projet</p>
+          <h1>Dans une cuisine, l'huile usagée finit dans un bidon. Ou dans l'évier.</h1>
+          <p class="lede">Un restaurant change son huile de friture toutes les une à deux semaines. Elle part dans des bidons de récupération : ils se renversent, ils sentent, ils contiennent des morceaux d'aliments, et personne ne sait quand ils sont pleins. Une partie finit dans les canalisations, où elle fige.</p>
+          <p class="lede"><b style="color:var(--fg)">OléoCollect fabrique et vend la machine qui remplace ces bidons</b> : une station posée dans la cuisine, qui reçoit l'huile refroidie, la filtre, la décante, la garde dans une cuve fermée et prévient quand elle est pleine. Le collecteur agréé vient alors l'aspirer.</p>
+        </div>
+        <div class="figs" id="figs"></div>
+        <p class="callout" style="border-left-color:var(--eau);background:var(--eau-tint)"><b>À retenir.</b> L'huile usagée n'appartient pas à OléoCollect : elle reste au restaurant. L'entreprise ne vend pas d'huile, elle vend la machine. Ses matières premières sont l'acier, l'inox et les composants qu'elle achète.</p>
+      </div>
+      <div class="kitchen">
+        <svg viewBox="0 0 420 320" role="img" aria-label="Comparaison : à gauche des bidons d'huile qui débordent, à droite la station fermée">
+          <defs><linearGradient id="oilg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e0b253"/><stop offset="1" stop-color="#a9741a"/></linearGradient></defs>
+          <text x="10" y="18" font-family="JetBrains Mono, monospace" font-size="10.5" fill="currentColor" opacity=".5">AUJOURD'HUI</text>
+          <text x="232" y="18" font-family="JetBrains Mono, monospace" font-size="10.5" fill="currentColor" opacity=".5">AVEC LA STATION</text>
+          <line x1="210" y1="28" x2="210" y2="300" stroke="currentColor" stroke-opacity=".14" stroke-dasharray="4 5"/>
+          <g>
+            <rect x="24" y="150" width="54" height="74" rx="5" fill="url(#oilg)" fill-opacity=".55" stroke="#a9741a"/>
+            <rect x="86" y="166" width="48" height="58" rx="5" fill="url(#oilg)" fill-opacity=".4" stroke="#a9741a"/>
+            <path d="M62 150c-6-14 4-22 10-10" fill="none" stroke="#a9741a" stroke-width="2"/>
+            <ellipse cx="96" cy="238" rx="48" ry="7" fill="url(#oilg)" fill-opacity=".35"/>
+            <ellipse cx="44" cy="248" rx="19" ry="4" fill="url(#oilg)" fill-opacity=".3"/>
+            <text x="24" y="272" font-size="11.5" fill="currentColor" opacity=".6">Bidons ouverts, résidus,</text>
+            <text x="24" y="288" font-size="11.5" fill="currentColor" opacity=".6">débordements, aucun suivi.</text>
+            <text x="24" y="306" font-size="11.5" fill="#c0503f">Rejet à l'égout interdit.</text>
+          </g>
+          <g transform="translate(236,106)">
+            <rect x="0" y="0" width="118" height="128" rx="9" fill="none" stroke="#3b6ea5" stroke-width="2.5"/>
+            <path d="M30 0h64l-14 26H44z" fill="#c98a1b" fill-opacity=".45" stroke="#c98a1b" stroke-width="1.6"/>
+            <rect x="26" y="-9" width="72" height="8" rx="3" fill="#c98a1b" fill-opacity=".7"/>
+            <rect x="34" y="34" width="56" height="28" rx="4" fill="#2f8f6b" fill-opacity=".35" stroke="#2f8f6b" stroke-width="1.6"/>
+            <circle cx="46" cy="78" r="9" fill="#c0503f" fill-opacity=".35" stroke="#c0503f" stroke-width="1.6"/>
+            <rect x="62" y="70" width="28" height="18" rx="4" fill="#c0503f" fill-opacity=".22" stroke="#c0503f" stroke-width="1.4"/>
+            <rect x="18" y="94" width="82" height="26" rx="6" fill="#6b5bbd" fill-opacity=".4" stroke="#6b5bbd" stroke-width="1.8"/>
+            <rect x="4" y="10" width="26" height="18" rx="4" fill="#1f8fa8" fill-opacity=".35" stroke="#1f8fa8" stroke-width="1.4"/>
+            <circle cx="11" cy="19" r="2.6" fill="#2f8f6b"/><circle cx="18" cy="19" r="2.6" fill="#c98a1b"/><circle cx="25" cy="19" r="2.6" fill="#c0503f"/>
+            <circle cx="18" cy="134" r="6" fill="none" stroke="#3b6ea5" stroke-width="2"/>
+            <circle cx="100" cy="134" r="6" fill="none" stroke="#3b6ea5" stroke-width="2"/>
+            <text x="-2" y="166" font-size="11.5" fill="currentColor" opacity=".6">Cuve fermée, huile propre,</text>
+            <text x="-2" y="182" font-size="11.5" fill="currentColor" opacity=".6">niveau connu, enlèvement tracé.</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="regles">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">02</p>
+      <h2>Pourquoi ce n'est pas qu'une question de propreté</h2>
+      <p class="lede">L'huile de friture est un déchet, pas une eau usée. Versée à l'évier, elle refroidit, se fige et colle aux parois : ce sont les bouchons de canalisation et la surcharge des stations d'épuration. Collectée proprement, c'est au contraire une matière première, qui devient du biodiesel.</p>
+    </div>
+    <div class="stack gap-20">
+      <div class="cards">
+        <div class="card"><div class="rule" style="background:var(--eau)"></div><h3>Dans l'eau</h3><p>L'huile fige en refroidissant et tapisse les canalisations. Elle gêne ensuite le traitement biologique des eaux usées, qui n'est pas conçu pour des corps gras.</p></div>
+        <div class="card"><div class="rule" style="background:var(--good)"></div><h3>Une ressource</h3><p>Une huile collectée sans eau ni résidus se transforme en biodiesel. C'est pour ça que les collecteurs la reprennent : plus elle est propre, plus elle vaut cher.</p></div>
+        <div class="card"><div class="rule" style="background:var(--accent)"></div><h3>Le gisement</h3><p>En Tunisie, l'ANGed estime le gisement à 88 000 tonnes par an. Environ 40 000 tonnes sont collectées chez les professionnels, soit 45 % de valorisation, pour un objectif annoncé de 80 %.</p></div>
+        <div class="card"><div class="rule" style="background:var(--crit)"></div><h3>La responsabilité</h3><p>Le restaurateur reste responsable de son déchet jusqu'à son traitement final. Il doit pouvoir prouver où son huile est partie.</p></div>
+      </div>
+      <h3 style="margin-top:8px">Ce que les règles imposent, et ce que la station apporte</h3>
+      <div class="rules" id="rules"></div>
+      <p class="callout"><b>Lecture.</b> Les références citées sont celles du droit français, le mieux documenté sur ce point, et proviennent de sources professionnelles plutôt que de Légifrance. En Tunisie, l'ANGed pilote la filière et un texte encadrant ces huiles était annoncé comme en préparation en juin 2026. La logique est la même partout : pas de rejet à l'égout, un collecteur déclaré, une preuve d'enlèvement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="machine" style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">03</p>
+      <h2>Comment la machine fonctionne</h2>
+      <p class="lede">L'animation suit l'huile, de la friteuse à la cuve, puis l'alerte et l'enlèvement. Clique une étape pour t'en approcher : la pièce concernée s'éclaire et le reste s'efface.</p>
+    </div>
+    <div class="split">
+      <div class="viewer">
+        <div class="stage" id="stageA">
+          <span class="badge-3d">3D · fonctionnement</span>
+          <div class="live"><span class="led" id="led"></span><span id="liveTxt">La cuve se remplit</span> · <b id="livePct">0 %</b></div>
+          <span class="stage-hint">glisser pour tourner · molette pour zoomer</span>
+        </div>
+        <div class="controls">
+          <div class="ctl-row">
+            <button class="btn" id="playA" type="button">Pause</button>
+            <label for="speedA">Vitesse</label>
+            <input type="range" id="speedA" min="20" max="200" value="100">
+            <button class="btn" id="resetA" type="button">Vue d'ensemble</button>
+          </div>
+        </div>
+      </div>
+      <div class="steps" id="steps"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="choix">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">04</p>
+      <h2>Pourquoi chaque pièce existe</h2>
+      <p class="lede">Rien n'a été ajouté pour faire joli. Chaque composant répond à une question simple, et quand une solution plus simple suffisait, c'est elle qui a été gardée.</p>
+    </div>
+    <div class="qa" id="qa"></div>
+  </div>
+</section>
+
+<section class="band" id="gamme" style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">05</p>
+      <h2>Ce que l'entreprise vend</h2>
+      <p class="lede">Deux stations, deux pièces de rechange, trois services. Les services ne sont jamais stockés. Les deux pièces de rechange sont déjà des articles de la station : le panier est fabriqué, la cartouche est achetée.</p>
+    </div>
+    <div class="stack gap-20">
+      <div class="prod" id="prod"></div>
+      <div class="cards">
+        <div class="card"><div class="rule"></div><h3>Location</h3><p>La station reste la propriété d'OléoCollect, le restaurant paie au mois. C'est l'offre qui lève le frein du prix d'achat.</p></div>
+        <div class="card"><div class="rule"></div><h3>Maintenance</h3><p>Visites périodiques : remplacement de la cartouche, nettoyage du panier, contrôle de la pompe.</p></div>
+        <div class="card"><div class="rule"></div><h3>Organisation de la collecte</h3><p>Mise en relation avec le collecteur agréé et déclenchement de l'enlèvement quand la cuve est pleine.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="fabrication">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">06</p>
+      <h2>Comment elle se fabrique, niveau par niveau</h2>
+      <p class="lede">C'est la nomenclature, en volume. Avance d'un niveau et regarde la matière prendre forme : les tôles et les tubes deviennent des pièces, les pièces deviennent des sous-ensembles soudés, les sous-ensembles deviennent six modules, les six modules deviennent la station.</p>
+    </div>
+    <div class="split">
+      <div class="viewer">
+        <div class="stage" id="stageB">
+          <span class="badge-3d">3D · fabrication</span>
+          <span class="stage-hint">glisser pour tourner</span>
+        </div>
+        <div class="controls">
+          <div class="ctl-row">
+            <button class="btn" id="prevL" type="button">◀ Précédent</button>
+            <button class="btn" id="nextL" type="button">Suivant ▶</button>
+            <button class="btn" id="autoL" type="button">Lecture auto</button>
+          </div>
+          <div class="chips" id="levelChips"></div>
+        </div>
+      </div>
+      <div class="stack gap-16" id="levelInfo"></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="nomenclature" style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">07</p>
+      <h2>La nomenclature complète</h2>
+      <p class="lede">Développée sur l'OC-120. La quantité est le coefficient : ce qu'il faut pour <b>une unité de l'article parent</b>. Chaque ligne porte aussi, en clair, ce à quoi la pièce sert.</p>
+    </div>
+    <div class="stack gap-16">
+      <div class="ctl-row" style="justify-content:space-between">
+        <div class="legend" id="legend"></div>
+        <div class="ctl-row">
+          <button class="btn" id="expandAll" type="button">Tout déplier</button>
+          <div class="seg" role="group" aria-label="Affichage">
+            <button type="button" id="vTree" aria-pressed="true">Arbre</button>
+            <button type="button" id="vTable" aria-pressed="false">Tableau</button>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="treeBox" style="padding:12px"><ul class="tree" id="tree"></ul></div>
+      <div class="tbl-wrap" id="tableBox" hidden>
+        <table>
+          <thead><tr><th>Niv.</th><th>Code</th><th>Désignation</th><th>À quoi ça sert</th><th>Qté</th><th>Unité</th><th>Fabriqué / Acheté</th><th>Dépôt</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="two-col">
+        <div class="callout"><b>Ce qui change pour l'OC-80.</b> Mêmes six modules, avec SF-BATI-80 et SF-STO-80 : bâti plus bas — 8 m de tube et 2,1 m² de tôle acier — et virole Ø 450 avec 0,8 m² de tôle inox plus 0,35 m² pour le fond et le toit. Les quatre autres modules sont identiques.</div>
+        <div class="callout" style="border-left-color:var(--m-sto)"><b>Vocabulaire.</b> Un <b>article</b> est tout ce qui est suivi en stock. Une <b>nomenclature</b> dit de quoi un article est composé ; elle est <b>multiniveau</b> quand un composant a lui-même une nomenclature. Le <b>niveau</b> est la profondeur depuis le produit fini. Le <b>coefficient</b> est la quantité pour une unité du parent.</div>
+      </div>
+      <h3 style="margin-top:6px">Le flux physique entre les dépôts</h3>
+      <div class="flow">
+        <div class="fstep dep"><span class="st-n">DÉPÔT MP</span><h4>Réception</h4><p>Tout ce qui arrive des fournisseurs F01 à F10.</p></div>
+        <div class="fstep"><span class="st-n">NIVEAU 4 → 3</span><h4>Débit et roulage</h4><p>Tubes coupés, flans découpés, virole roulée.</p></div>
+        <div class="fstep"><span class="st-n">NIVEAU 2</span><h4>Soudage et peinture</h4><p>Châssis, cuves, trémie, bac, groupe motopompe.</p></div>
+        <div class="fstep"><span class="st-n">NIVEAU 1</span><h4>Montage des modules</h4><p>Les six modules, rangés au dépôt SF.</p></div>
+        <div class="fstep"><span class="st-n">NIVEAU 0</span><h4>Assemblage et essai</h4><p>Montage dans le bâti, essai de pompage, emballage.</p></div>
+        <div class="fstep dep"><span class="st-n">DÉPÔT PF</span><h4>Expédition</h4><p>OC-80, OC-120, PR-PAN, PR-CART.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="partenaires">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">08</p>
+      <h2>À qui on achète, à qui on vend</h2>
+      <p class="lede">Dix fournisseurs pour 34 articles achetés, six profils de clients. Aucune commande d'achat n'est préparée dans ce dossier : seules les sources et les besoins sont posés.</p>
+    </div>
+    <div class="stack gap-28">
+      <div class="stack gap-16"><h3>Les clients</h3><div class="cards" id="clients"></div></div>
+      <div class="stack gap-16"><h3>Les fournisseurs</h3><div class="cards" id="fourn"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="depots" style="background:var(--surface-2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">09</p>
+      <h2>Où chaque article est rangé</h2>
+      <p class="lede">Trois dépôts, et un article ne peut être que dans un seul. Un même objet physique ne change pas de dépôt : il change de code. Le panier monté dans la station est SF-PANIER au dépôt SF ; vendu seul, c'est PR-PAN au dépôt PF.</p>
+    </div>
+    <div class="dep-cards" id="deps"></div>
+  </div>
+</section>
+
+<section class="band" id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-num">10</p>
+      <h2>Ce qui vient du document, ce qui est supposé</h2>
+      <p class="lede">Le document de projet décrit la machine et son marché ; il ne descend pas au niveau des pièces. Tout ce qui était nécessaire à la nomenclature a été construit et figure ici comme hypothèse.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <h3>Origine des informations</h3>
+        <ul class="src-list">
+          <li><span class="k doc">DOC</span><span>Principe de la station : recevoir, filtrer, décanter, pomper vers une cuve fermée, alerter quand elle est pleine</span></li>
+          <li><span class="k doc">DOC</span><span>Les deux modèles 80 L et 120 L</span></li>
+          <li><span class="k doc">DOC</span><span>Deux pièces de rechange, plus location, maintenance et organisation de la collecte</span></li>
+          <li><span class="k doc">DOC</span><span>Production par petits lots, en assemblage</span></li>
+          <li><span class="k doc">DOC</span><span>Aucune transformation chimique ; l'huile n'appartient pas à l'entreprise</span></li>
+          <li><span class="k td">TD</span><span>Trois dépôts MP, SF et PF ; nomenclature à quatre niveaux minimum</span></li>
+          <li><span class="k hyp">HYP</span><span>Découpage en six modules, déduit des six fonctions décrites dans le document</span></li>
+          <li><span class="k hyp">HYP</span><span>Décomposition en sous-ensembles chaudronnés, calquée sur la gamme réelle débit → formage → soudage → peinture</span></li>
+          <li><span class="k hyp">HYP</span><span>Codification OC, SF, MP, PR, F01 à F10</span></li>
+          <li><span class="k hyp">HYP</span><span>Choix des composants achetés : type de pompe, de capteur, de module de communication</span></li>
+          <li><span class="k hyp">HYP</span><span>Quantités et dimensions : surfaces de tôle, longueurs de tube, nombre de raccords — à recaler sur un plan côté</span></li>
+          <li><span class="k hyp">HYP</span><span>Les dix fournisseurs et la répartition des achats entre eux</span></li>
+          <li><span class="k hyp">HYP</span><span>Les six profils de clients et leurs volumes de commande</span></li>
+        </ul>
+      </div>
+      <div class="stack gap-16">
+        <div class="card">
+          <h3>Contrôle de cohérence</h3>
+          <ul>
+            <li>Chaque produit de la gamme a une nomenclature ou un fournisseur</li>
+            <li>Chaque produit commandé par un client existe dans la gamme</li>
+            <li>Chaque article acheté a un fournisseur, de F01 à F10</li>
+            <li>Chaque article a un seul dépôt</li>
+            <li>Chaque niveau correspond à une opération réelle</li>
+            <li>5 niveaux (0 à 4) sur les branches stockage et pompage, 4 niveaux (0 à 3) sur les autres</li>
+          </ul>
+        </div>
+        <div class="card"><h3>Ce que demande l'énoncé</h3><div class="checks" id="checks"></div></div>
+        <div class="card">
+          <h3>Sources extérieures</h3>
+          <ul>
+            <li><a href="https://www.webmanagercenter.com/2026/06/03/567696/tunisie-un-potentiel-de-88-000-tonnes-dhuiles-alimentaires-usagees-et-un-objectif-de-80-de-collecte/">WMC, 3 juin 2026 — chiffres ANGed : gisement, collecte, objectif de 80 %</a></li>
+            <li><a href="https://fr.quatra.com/blog/conseils-29/recyclage-dhuile-de-friture-en-france-obligations-legales-pour-les-restaurants-et-friteries-130">Quatra — obligations légales des restaurants en France</a></li>
+            <li><a href="https://www.conseilsrestaurant.com/collecte-d-huile-usagee-reglementation-et-normes-a-connaitre">Conseils Restaurant — collecte des huiles usagées et traçabilité</a></li>
+          </ul>
+          <p style="font-size:12.5px;color:var(--muted)">Les articles de loi cités viennent de sources professionnelles : à vérifier sur Légifrance, ou à remplacer par les textes du pays du projet, avant un rendu officiel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <span>Dossier OléoCollect — besoin, produit, nomenclature multiniveau et partenaires</span>
+    <span class="mono">19 novembre 2026</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script>if(typeof THREE==="undefined"){document.write('<scr'+'ipt src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/scr'+'ipt>');}</script>
+<script>if(typeof THREE==="undefined"){document.write('<scr'+'ipt src="https://unpkg.com/three@0.128.0/build/three.min.js"><\/scr'+'ipt>');}</script>
+<script>
+/* ===========================================================
+   DONNÉES — nomenclature OC-120
+   k : famille PF / SF / MP · q : coefficient pour 1 unité du parent
+   r : à quoi la pièce sert, en clair
+   =========================================================== */
+var BOM = {
+ c:'OC-120', d:'Station connectée 120 L', q:'1', u:'u', k:'PF', mk:'Fabriqué (assemblage final)',
+ r:'La station complète, livrée prête à brancher',
+ ch:[
+  {c:'SF-BATI-120', d:'Bâti équipé 120', q:'1', u:'u', k:'SF', mod:'bati', r:'Porte tout et retient les fuites', ch:[
+    {c:'SF-CHAS', d:'Châssis soudé et peint', q:'1', u:'u', k:'SF', r:'Le squelette qui supporte les cuves', ch:[
+      {c:'MP-TUBE', d:'Tube acier carré 30×30×2', q:'10', u:'m', k:'MP', f:'F02', r:'Les montants et les traverses'},
+      {c:'MP-PEINT', d:'Peinture époxy en poudre', q:'0,5', u:'kg', k:'MP', f:'F03', r:"Protège l'acier de la corrosion"}
+    ]},
+    {c:'SF-PAN', d:"Jeu de panneaux d'habillage pliés et peints", q:'1', u:'jeu', k:'SF', r:'Ferme la machine et la rend nettoyable', ch:[
+      {c:'MP-TOLE-A', d:'Tôle acier 1 mm', q:'2,6', u:'m²', k:'MP', f:'F02', r:'La peau des panneaux'},
+      {c:'MP-PEINT', d:'Peinture époxy en poudre', q:'0,4', u:'kg', k:'MP', f:'F03', r:'Finition lavable'}
+    ]},
+    {c:'SF-BAC', d:'Bac de rétention plié-soudé', q:'1', u:'u', k:'SF', r:"Récupère l'huile en cas de fuite, au lieu du sol", ch:[
+      {c:'MP-TOLE-G', d:'Tôle galvanisée 1,5 mm', q:'0,8', u:'m²', k:'MP', f:'F02', r:"Résiste à l'humidité du sol"}
+    ]},
+    {c:'MP-ROUL', d:'Roulette pivotante à frein', q:'4', u:'u', k:'MP', f:'F08', r:'Déplacer la station pour nettoyer dessous'}
+  ]},
+  {c:'SF-REC', d:'Module réception', q:'1', u:'u', k:'SF', mod:'rec', r:"Reçoit l'huile et retient les gros résidus", ch:[
+    {c:'SF-TREM', d:'Trémie inox soudée avec couvercle', q:'1', u:'u', k:'SF', r:'Entonnoir large : on verse sans déborder', ch:[
+      {c:'MP-TOLE-X', d:'Tôle inox 304 1,5 mm', q:'0,45', u:'m²', k:'MP', f:'F01', r:'Inox : contact alimentaire et nettoyage'}
+    ]},
+    {c:'SF-PANIER', d:'Panier filtrant amovible', q:'1', u:'u', k:'SF', r:'Retient frites et miettes, se retire et se lave', ch:[
+      {c:'MP-TAMIS', d:'Toile tamis inox', q:'0,12', u:'m²', k:'MP', f:'F01', r:'La maille du panier'},
+      {c:'MP-ROND', d:'Rond inox Ø 6 (armature)', q:'1,6', u:'m', k:'MP', f:'F01', r:'Le cadre qui tient la maille'}
+    ]},
+    {c:'MP-CHARN', d:'Charnière inox (couvercle)', q:'2', u:'u', k:'MP', f:'F08', r:'Le couvercle se rabat et bloque les odeurs'}
+  ]},
+  {c:'SF-DEC', d:'Module décantation', q:'1', u:'u', k:'SF', mod:'dec', r:'Laisse tomber les fines particules au fond', ch:[
+    {c:'SF-CDEC', d:'Cuve de décantation 40 L à fond incliné', q:'1', u:'u', k:'SF', r:'Le fond incliné amène le dépôt vers la vanne', ch:[
+      {c:'MP-TOLE-X', d:'Tôle inox 304 1,5 mm', q:'0,65', u:'m²', k:'MP', f:'F01', r:'Corps de la cuve'}
+    ]},
+    {c:'MP-VPURGE', d:'Vanne de purge 1/2"', q:'1', u:'u', k:'MP', f:'F06', r:'Évacuer le dépôt sans ouvrir la cuve'}
+  ]},
+  {c:'SF-POMP', d:'Module pompage et filtration fine', q:'1', u:'u', k:'SF', mod:'pomp', r:"Pousse l'huile claire à travers la cartouche", ch:[
+    {c:'SF-GMP', d:'Groupe motopompe monté', q:'1', u:'u', k:'SF', r:'Pompe et moteur montés sur une platine', ch:[
+      {c:'MP-POMPE', d:'Pompe à engrenages compatible huile', q:'1', u:'u', k:'MP', f:'F04', r:'Aspire un liquide épais sans le chauffer'},
+      {c:'MP-MOT', d:'Moteur électrique 0,37 kW', q:'1', u:'u', k:'MP', f:'F04', r:'Entraîne la pompe'},
+      {c:'MP-ACC', d:'Accouplement pompe-moteur', q:'1', u:'u', k:'MP', f:'F04', r:"Relie les deux axes et absorbe le défaut d'alignement"},
+      {c:'SF-SUPP', d:'Support de pompe plié-percé', q:'1', u:'u', k:'SF', r:'Tient le groupe et limite les vibrations', ch:[
+        {c:'MP-TOLE-E', d:'Tôle acier 3 mm', q:'0,1', u:'m²', k:'MP', f:'F02', r:'Tôle épaisse, rigide'}
+      ]}
+    ]},
+    {c:'MP-CFIL', d:'Corps de filtre', q:'1', u:'u', k:'MP', f:'F05', r:'Le boîtier qui tient la cartouche'},
+    {c:'MP-CART', d:'Cartouche filtrante', q:'1', u:'u', k:'MP', f:'F05', r:'Retient les dernières particules'},
+    {c:'MP-FLEX', d:'Tuyau flexible compatible huile', q:'2', u:'m', k:'MP', f:'F06', r:'Relie les cuves à la pompe'},
+    {c:'MP-RACC', d:'Raccord inox 1/2"', q:'6', u:'u', k:'MP', f:'F06', r:'Brancher sans fuite'}
+  ]},
+  {c:'SF-STO-120', d:'Module stockage 120 L', q:'1', u:'u', k:'SF', mod:'sto', r:'La réserve fermée que le collecteur vient vider', ch:[
+    {c:'SF-CSTO-120', d:'Cuve de stockage 120 L soudée', q:'1', u:'u', k:'SF', r:'Cuve inox étanche, Ø 500 sur 0,62 m', ch:[
+      {c:'SF-VIR-120', d:'Virole roulée Ø 500', q:'1', u:'u', k:'SF', r:'Le corps cylindrique, roulé puis soudé', ch:[
+        {c:'MP-TOLE-X', d:'Tôle inox 304 1,5 mm', q:'1,0', u:'m²', k:'MP', f:'F01', r:'La tôle qui est roulée'}
+      ]},
+      {c:'MP-TOLE-X', d:'Tôle inox 304 1,5 mm (fond et toit)', q:'0,45', u:'m²', k:'MP', f:'F01', r:'Ferme la cuve en haut et en bas'}
+    ]},
+    {c:'MP-SORTIE', d:'Raccord de sortie rapide', q:'1', u:'u', k:'MP', f:'F06', r:'Le collecteur branche son tuyau ici'},
+    {c:'MP-EVENT', d:'Évent filtrant', q:'1', u:'u', k:'MP', f:'F06', r:"Laisse entrer l'air pendant l'aspiration, retient l'odeur"},
+    {c:'MP-JOINT', d:"Lot de joints d'étanchéité", q:'1', u:'lot', k:'MP', f:'F06', r:'Étanchéité des trappes et des raccords'}
+  ]},
+  {c:'SF-CMD', d:'Module commande et surveillance', q:'1', u:'u', k:'SF', mod:'cmd', r:'Mesure le niveau, prévient la cuisine et le collecteur', ch:[
+    {c:'MP-COFF', d:'Coffret électrique étanche', q:'1', u:'u', k:'MP', f:'F07', r:"Protège l'électronique de la vapeur et des projections"},
+    {c:'MP-CARTE', d:'Carte de commande à microcontrôleur', q:'1', u:'u', k:'MP', f:'F07', r:'Lit le capteur, allume les voyants, commande la pompe'},
+    {c:'MP-COM', d:'Module cellulaire bas débit (NB-IoT / LTE-M)', q:'1', u:'u', k:'MP', f:'F07', r:'Envoie le niveau au collecteur : quelques octets par jour'},
+    {c:'MP-SIM', d:'Carte SIM IoT', q:'1', u:'u', k:'MP', f:'F09', r:"L'abonnement data du module"},
+    {c:'MP-NIV', d:'Capteur de niveau', q:'1', u:'u', k:'MP', f:'F07', r:"Mesure la hauteur d'huile dans la cuve"},
+    {c:'MP-VOY', d:'Voyant tricolore vert / orange / rouge', q:'1', u:'u', k:'MP', f:'F07', r:'Le niveau, lisible depuis la cuisine'},
+    {c:'MP-AU', d:"Bouton d'arrêt d'urgence", q:'1', u:'u', k:'MP', f:'F07', r:'Couper le moteur immédiatement'},
+    {c:'MP-CABLE', d:'Câble électrique', q:'4', u:'m', k:'MP', f:'F07', r:'Relie coffret, capteur et pompe'}
+  ]},
+  {c:'MP-VIS', d:'Lot de visserie inox', q:'1', u:'lot', k:'MP', f:'F08', r:'Assemblage des modules dans le bâti'},
+  {c:'MP-PAL', d:'Palette', q:'1', u:'u', k:'MP', f:'F10', r:'Transport de la station'},
+  {c:'MP-FILM', d:'Film étirable', q:'0,8', u:'kg', k:'MP', f:'F10', r:'Protège pendant le transport'},
+  {c:'MP-ETQR', d:'Étiquette QR de traçabilité', q:'1', u:'u', k:'MP', f:'F10', r:'Identifie la station et son historique de collecte'},
+  {c:'MP-NOT', d:"Notice d'utilisation", q:'1', u:'u', k:'MP', f:'F10', r:"Mode d'emploi affiché en cuisine"}
+ ]
+};
+
+var MODULES = [
+ {id:'bati', code:'SF-BATI-120', name:'Bâti et habillage', color:'#3b6ea5', hex:0x3b6ea5},
+ {id:'rec',  code:'SF-REC',      name:'Réception',        color:'#c98a1b', hex:0xc98a1b},
+ {id:'dec',  code:'SF-DEC',      name:'Décantation',      color:'#2f8f6b', hex:0x2f8f6b},
+ {id:'pomp', code:'SF-POMP',     name:'Pompage',          color:'#c0503f', hex:0xc0503f},
+ {id:'sto',  code:'SF-STO-120',  name:'Stockage',         color:'#6b5bbd', hex:0x6b5bbd},
+ {id:'cmd',  code:'SF-CMD',      name:'Commande',         color:'#1f8fa8', hex:0x1f8fa8}
+];
+
+var STEPS = [
+ {mod:'rec',  t:"On verse l'huile refroidie", p:"Le cuisinier vide sa friteuse dans la trémie. Le panier retient tout de suite les frites et les miettes : c'est lui qui évite que la suite se bouche."},
+ {mod:'dec',  t:'Elle se décante', p:"Dans la cuve de 40 L, l'huile se repose. Les particules fines tombent au fond, et la vanne de purge permet de les évacuer."},
+ {mod:'pomp', t:'La pompe la pousse à travers le filtre', p:"La pompe ne sert pas à monter l'huile : elle sert à la forcer à travers la cartouche, ce que la gravité ne ferait pas."},
+ {mod:'sto',  t:'La cuve fermée se remplit', p:"120 litres d'huile propre, à l'abri de l'air et des odeurs. Rien ne se renverse, rien ne traîne au sol."},
+ {mod:'cmd',  t:"Le niveau est connu, l'alerte part", p:"Le capteur mesure la hauteur d'huile. Le voyant passe du vert au rouge en cuisine, et le module envoie le niveau au collecteur, qui vient aspirer par le raccord rapide."}
+];
+
+var QA = [
+ {q:'Pourquoi une pompe, si la cuve est en bas ?', a:"Par gravité, l'huile descendrait toute seule. Mais elle doit traverser une cartouche filtrante, et ça, il faut le pousser. La pompe sert à la filtration, pas au transport."},
+ {q:'Pourquoi trois filtrations différentes ?', a:"Chacune a sa taille. Le panier retient les morceaux, la décantation laisse tomber les particules fines, la cartouche arrête le reste. Sans les deux premières, la cartouche se boucherait en une semaine."},
+ {q:'Pourquoi pas de la 4G ou de la 5G ?', a:"La station envoie une hauteur d'huile, soit quelques octets par jour. La 4G et la 5G sont faites pour la vidéo : plus chères, plus gourmandes et moins bonnes à travers les murs d'une cuisine. Un module cellulaire bas débit, NB-IoT ou LTE-M, est conçu exactement pour ce besoin."},
+ {q:'Pourquoi un évent sur une cuve fermée ?', a:"Quand le collecteur aspire, il faut que de l'air entre, sinon la cuve se met en dépression et l'aspiration s'arrête. L'évent est filtrant pour que l'odeur ne sorte pas."},
+ {q:'Pourquoi un bac de rétention ?', a:"Un raccord finit toujours par suinter. Le bac récupère quelques litres au lieu de les laisser sur un sol de cuisine, qui devient glissant."},
+ {q:'Pourquoi une étiquette QR ?', a:"Le restaurateur doit prouver où son huile est partie. Le QR identifie la station, et chaque enlèvement s'y rattache : c'est la trace demandée en cas de contrôle."}
+];
+
+var RULES = [
+ {t:"Interdiction de rejeter à l'égout", d:"Aucun déversement susceptible d'obstruer les canalisations ou de gêner l'épuration des eaux usées.", ok:"La cuve fermée et le raccord d'aspiration font qu'il n'y a plus de bidon à vider dans un évier.", ref:'Code de la santé publique, art. L1331-10'},
+ {t:'Le producteur reste responsable', d:"Le restaurateur répond de son déchet jusqu'à son traitement ou son recyclage final.", ok:"Le niveau est horodaté et l'étiquette QR rattache chaque enlèvement à la station.", ref:"Code de l'environnement, art. L541-2"},
+ {t:'Collecte par un professionnel déclaré', d:"Au-delà d'un petit volume annuel, l'enlèvement passe par un collecteur agréé pour le transport et le traitement.", ok:"Le service d'organisation de la collecte met le restaurant en relation avec ce collecteur et déclenche l'enlèvement.", ref:"Code de l'environnement, art. R543-226"},
+ {t:"Preuve d'enlèvement à conserver", d:"Chaque passage doit être justifié par un bon de collecte ou un document équivalent.", ok:'Chaque alerte et chaque enlèvement sont enregistrés et rattachés au QR de la station.', ref:'Bon de collecte'}
+];
+
+var FOURN = [
+ {c:'F01', n:'Aciers inoxydables', a:'Tôle inox 304 1,5 mm, toile tamis inox, rond inox Ø 6', s:'Trémie, panier, cuves de décantation et de stockage'},
+ {c:'F02', n:'Aciers et tubes', a:'Tube acier carré 30×30, tôle acier 1 mm, tôle galvanisée 1,5 mm, tôle acier 3 mm', s:'Châssis, panneaux, bac de rétention, support de pompe'},
+ {c:'F03', n:'Peinture industrielle', a:'Peinture époxy en poudre', s:'Châssis et panneaux'},
+ {c:'F04', n:'Pompes et moteurs', a:'Pompe à engrenages compatible huile, moteur 0,37 kW, accouplement', s:'Groupe motopompe'},
+ {c:'F05', n:'Filtration', a:'Corps de filtre, cartouche filtrante', s:'Module pompage ; la cartouche est aussi revendue en PR-CART'},
+ {c:'F06', n:'Robinetterie et raccords', a:'Vanne de purge, flexible huile, raccord inox, raccord de sortie rapide, évent, joints', s:'Décantation, pompage, stockage'},
+ {c:'F07', n:'Électricité et automatisme', a:"Coffret étanche, carte de commande, module cellulaire bas débit, capteur de niveau, voyant, arrêt d'urgence, câble", s:'Module commande et surveillance'},
+ {c:'F08', n:'Quincaillerie', a:'Roulette à frein, charnière inox, visserie inox', s:'Bâti, couvercle de la trémie, assemblage final'},
+ {c:'F09', n:'Opérateur télécom', a:'Carte SIM IoT', s:'Abonnement data du module de communication'},
+ {c:'F10', n:'Emballage et impression', a:'Palette, film étirable, étiquette QR, notice', s:'Emballage et traçabilité de la station'}
+];
+
+var CLIENTS = [
+ {n:'Snacks, fast-foods', b:'Huile changée souvent, peu de place en cuisine', p:'OC-80 + PR-CART', q:'1 station + 4 cartouches', col:'var(--m-rec)'},
+ {n:'Restaurants indépendants, traiteurs', b:'Fin des bidons, savoir quand appeler le collecteur', p:'OC-80 ou OC-120 + maintenance', q:'1 station', col:'var(--m-dec)'},
+ {n:'Chaînes de restauration, centres commerciaux', b:"Équiper plusieurs points de vente à l'identique", p:'OC-80, OC-120', q:'5 à 15 stations', col:'var(--m-bati)'},
+ {n:'Hôtels', b:'Plusieurs cuisines, gros volumes', p:'OC-120 + PR-PAN + PR-CART', q:'1 à 3 stations', col:'var(--m-sto)'},
+ {n:'Restauration collective : cantines, hôpitaux', b:'Volumes réguliers et traçabilité exigée', p:'OC-120', q:'1 à 5 stations, achat public possible', col:'var(--m-cmd)'},
+ {n:'Collecteurs agréés', b:'Équiper leurs clients et planifier leurs tournées', p:'OC-80, OC-120, PR-CART', q:'Lots de 10 à 30 stations', col:'var(--m-pomp)'}
+];
+
+var DEPOTS = [
+ {c:'MP', t:'Matières premières et composants achetés', col:'var(--fam-mp)', body:"Tôles inox, acier et galvanisée, tubes, peinture, toile tamis, rond inox, pompes, moteurs, accouplements, corps de filtre, cartouches, vannes, flexibles, raccords, évents, joints, coffrets, cartes de commande, modules de communication, capteurs, voyants, arrêts d'urgence, câbles, cartes SIM, roulettes, charnières, visserie, palettes, film, étiquettes QR, notices.", i:'Réceptions des fournisseurs F01 à F10', o:'Ateliers de fabrication'},
+ {c:'SF', t:'Produits semi-finis', col:'var(--fam-sf)', body:'Châssis peints, jeux de panneaux, bacs de rétention, trémies, paniers filtrants, cuves de décantation, supports de pompe, groupes motopompes, viroles, cuves de stockage 80 et 120 L, et les six modules : bâti 80 et 120, réception, décantation, pompage, stockage 80 et 120 L, commande.', i:'Ateliers, niveaux 1 à 3', o:'Atelier du niveau supérieur'},
+ {c:'PF', t:'Produits finis', col:'var(--fam-pf)', body:'OC-80, OC-120, paniers de rechange PR-PAN, cartouches de rechange PR-CART.', i:'Assemblage final ; transfert depuis SF ou MP pour les rechanges', o:'Livraison aux clients'}
+];
+
+var LEVELS = [
+ {n:4, codes:['MP-TOLE-X','MP-TOLE-A','MP-TOLE-G','MP-TUBE','MP-PEINT','+ 29 autres'], t:'Matières premières', d:'Tôles inox, acier et galvanisée, tubes acier, peinture et composants achetés arrivent des fournisseurs et attendent au dépôt MP.', op:'Réception et contrôle', dep:'MP'},
+ {n:3, codes:['SF-VIR-120','SF-SUPP'], t:'Pièces débitées et formées', d:"Deux pièces seulement ont leur propre code à ce niveau : la virole roulée et le support plié. Les tubes débités et les flans, en transparence, sont formés et soudés dans la même opération : ils ne sont pas stockés séparément.", op:'Débit, découpe, roulage, pliage', dep:'SF'},
+ {n:2, codes:['SF-CHAS','SF-PAN','SF-BAC','SF-TREM','SF-PANIER','SF-CDEC','SF-GMP','SF-CSTO-120'], t:'Sous-ensembles soudés', d:'Huit sous-ensembles : châssis peint, panneaux, bac de rétention, trémie, panier, cuve de décantation, groupe motopompe et cuve de stockage.', op:'Soudage, peinture, montage', dep:'SF'},
+ {n:1, codes:['SF-BATI-120','SF-REC','SF-DEC','SF-POMP','SF-STO-120','SF-CMD'], t:'Les six modules', d:'Chaque module est monté complet et contrôlé séparément : bâti, réception, décantation, pompage, stockage, commande.', op:'Montage des modules', dep:'SF'},
+ {n:0, codes:['OC-120','OC-80'], t:'La station', d:'Les six modules sont assemblés dans le bâti, la station est mise en eau, le pompage est essayé, puis elle est emballée sur palette.', op:'Assemblage final et essai', dep:'PF'}
+];
+
+var CHECKS = [
+ ["Activité, ce qu'elle fabrique et commercialise",'#besoin'],
+ ['Gamme de produits','#gamme'],
+ ['Nomenclature multiniveau, 4 niveaux minimum','#nomenclature'],
+ ['Schéma arborescent','#nomenclature'],
+ ['Matières premières et composants achetés','#partenaires'],
+ ['Produits semi-finis fabriqués en interne','#fabrication'],
+ ['Clients potentiels, profils et produits','#partenaires'],
+ ['Fournisseurs et ce que chacun fournit','#partenaires'],
+ ['Trois dépôts MP, SF, PF et leurs articles','#depots'],
+ ["Aucune commande d'achat préparée",'#partenaires']
+];
+
+/* ---------------- utilitaires ---------------- */
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;}
+function famVar(k){return k==='PF'?'var(--fam-pf)':k==='SF'?'var(--fam-sf)':'var(--fam-mp)';}
+function walk(n,d,fn){fn(n,d);if(n.ch)for(var i=0;i<n.ch.length;i++)walk(n.ch[i],d+1,fn);}
+function modColor(id){for(var i=0;i<MODULES.length;i++)if(MODULES[i].id===id)return MODULES[i];return null;}
+
+/* ---------------- chiffres ---------------- */
+(function(){
+  var f=[['88 000 t',"d'huile alimentaire usagée produites par an en Tunisie"],
+         ['40 000 t','collectées chez les professionnels'],
+         ['45 %','valorisés aujourd’hui'],
+         ['80 %',"objectif annoncé par l'ANGed"]];
+  var b=document.getElementById('figs');
+  f.forEach(function(x){var d=el('div','fig');d.appendChild(el('b',null,x[0]));d.appendChild(el('span',null,x[1]));b.appendChild(d);});
+})();
+
+/* ---------------- règles ---------------- */
+(function(){
+  var b=document.getElementById('rules');
+  RULES.forEach(function(r){
+    var row=el('div','rule-row');
+    var l=el('div');l.appendChild(el('h4',null,r.t));l.appendChild(el('p',null,r.d));
+    row.appendChild(l);row.appendChild(el('div','ok',r.ok));row.appendChild(el('span','ref',r.ref));
+    b.appendChild(row);
+  });
+})();
+
+/* ---------------- questions techniques ---------------- */
+(function(){
+  var b=document.getElementById('qa');
+  QA.forEach(function(x){var c=el('div','q');c.appendChild(el('h4',null,x.q));c.appendChild(el('p',null,x.a));b.appendChild(c);});
+})();
+
+/* ---------------- gamme ---------------- */
+(function(){
+  function art(w,h,color){
+    return '<svg width="58" height="74" viewBox="0 0 58 74" role="img" aria-label="Schéma du produit">'+
+      '<rect x="'+((58-w)/2)+'" y="'+(70-h)+'" width="'+w+'" height="'+h+'" rx="6" fill="'+color+'" fill-opacity=".28" stroke="'+color+'" stroke-width="1.6"/>'+
+      '<ellipse cx="29" cy="'+(70-h)+'" rx="'+(w/2)+'" ry="4" fill="'+color+'" fill-opacity=".75"/>'+
+      '<rect x="22" y="'+(70-h-11)+'" width="14" height="8" rx="2" fill="'+color+'" fill-opacity=".6"/></svg>';
+  }
+  var items=[
+    {code:'OC-80',name:'Station connectée 80 L',art:art(32,50,'#6b5bbd'),comp:'Bâti 80 + réception + décantation + pompage + stockage 80 L + commande',who:'Snacks, fast-foods, petits restaurants',tags:['Produit fini','Fabriqué','Cuve Ø 450 × 0,50 m'],fam:'pf'},
+    {code:'OC-120',name:'Station connectée 120 L',art:art(40,62,'#6b5bbd'),comp:'Bâti 120 + réception + décantation + pompage + stockage 120 L + commande',who:'Restaurants, hôtels, cantines',tags:['Produit fini','Fabriqué','Cuve Ø 500 × 0,62 m'],fam:'pf'},
+    {code:'PR-PAN',name:'Panier filtrant de rechange',art:art(30,28,'#c98a1b'),comp:'Le panier fabriqué pour la station, vendu seul — même nomenclature que SF-PANIER',who:'Parc de stations installées',tags:['Produit fini','Fabriqué'],fam:'sf'},
+    {code:'PR-CART',name:'Cartouche filtrante de rechange',art:art(24,34,'#c0503f'),comp:'Achetée chez F05 et revendue telle quelle, sans nomenclature',who:'Parc de stations installées',tags:['Produit fini','Acheté'],fam:'pf'}
+  ];
+  var box=document.getElementById('prod');
+  items.forEach(function(it){
+    var c=el('div','p-card');
+    var top=el('div','p-top');top.innerHTML=it.art;
+    var meta=el('div');meta.appendChild(el('div','p-code',it.code));meta.appendChild(el('h3',null,it.name));
+    top.appendChild(meta);c.appendChild(top);
+    var body=el('div','p-body');body.appendChild(el('p',null,it.comp));
+    var sp=el('div','specs');
+    it.tags.forEach(function(t,i){sp.appendChild(el('span','tag'+(i===0?' '+it.fam:''),t));});
+    body.appendChild(sp);
+    var w=el('p',null,'Pour : '+it.who);w.style.fontSize='12.5px';body.appendChild(w);
+    c.appendChild(body);box.appendChild(c);
+  });
+})();
+
+/* ---------------- arbre + tableau ---------------- */
+(function(){
+  var allLists=[];
+  function nodeLi(n,depth){
+    var li=el('li'), row=el('div','node'), m=n.mod?modColor(n.mod):null;
+    if(n.ch){var b=el('button','tgl','–');b.type='button';b.setAttribute('aria-label','Plier ou déplier '+n.c);row.appendChild(b);}
+    else{var dd=el('span','leafdot');dd.appendChild(el('i'));row.appendChild(dd);}
+    var code=el('span','n-code',n.c);code.style.color=m?m.color:famVar(n.k);row.appendChild(code);
+    var main=el('div','n-main'), top=el('div','n-top');
+    top.appendChild(el('span','n-des',n.d));
+    top.appendChild(el('span','pill q',n.q+' '+n.u));
+    top.appendChild(el('span','pill',n.k==='MP'?'acheté':'fabriqué'));
+    if(n.f)top.appendChild(el('span','pill f',n.f));
+    top.appendChild(el('span','pill','dépôt '+n.k));
+    main.appendChild(top);
+    if(n.r)main.appendChild(el('span','n-role',n.r));
+    row.appendChild(main);
+    if(m)row.style.boxShadow='inset 3px 0 0 '+m.color;
+    li.appendChild(row);
+    if(n.ch){
+      var ul=el('ul');allLists.push(ul);
+      n.ch.forEach(function(k){ul.appendChild(nodeLi(k,depth+1));});
+      if(depth>=2){ul.hidden=true;row.querySelector('.tgl').textContent='+';}
+      li.appendChild(ul);
+      row.querySelector('.tgl').addEventListener('click',function(){
+        ul.hidden=!ul.hidden;this.textContent=ul.hidden?'+':'–';
+      });
+    }
+    return li;
+  }
+  document.getElementById('tree').appendChild(nodeLi(BOM,0));
+
+  var tb=document.getElementById('tbody');
+  walk(BOM,0,function(n,d){
+    var tr=el('tr');tr.setAttribute('data-k',n.k);
+    tr.appendChild(el('td','c-q',String(d)));
+    var c=el('td','c-code',n.c);c.style.color=famVar(n.k);c.style.paddingLeft=(11+d*12)+'px';tr.appendChild(c);
+    tr.appendChild(el('td',null,n.d));
+    var role=el('td',null,n.r||'');role.style.color='var(--muted)';tr.appendChild(role);
+    tr.appendChild(el('td','c-q',n.q));
+    tr.appendChild(el('td','c-q',n.u));
+    tr.appendChild(el('td',null,n.k==='MP'?('Acheté'+(n.f?' ('+n.f+')':'')):(n.mk||'Fabriqué')));
+    tr.appendChild(el('td','c-q',n.k));
+    tb.appendChild(tr);
+  });
+
+  var lg=document.getElementById('legend');
+  [['PF','produit fini','var(--fam-pf)'],['SF','semi-fini fabriqué','var(--fam-sf)'],['MP','matière ou composant acheté','var(--fam-mp)']]
+   .forEach(function(x){var s=el('span','lv');s.innerHTML='<b style="color:'+x[2]+'">'+x[0]+'</b> '+x[1];lg.appendChild(s);});
+
+  var vT=document.getElementById('vTree'),vB=document.getElementById('vTable');
+  var treeBox=document.getElementById('treeBox'),tableBox=document.getElementById('tableBox');
+  function show(t){treeBox.hidden=!t;tableBox.hidden=t;vT.setAttribute('aria-pressed',String(t));vB.setAttribute('aria-pressed',String(!t));}
+  vT.addEventListener('click',function(){show(true);});
+  vB.addEventListener('click',function(){show(false);});
+  var open=false;
+  document.getElementById('expandAll').addEventListener('click',function(){
+    open=!open;
+    allLists.forEach(function(ul){ul.hidden=!open;});
+    var tg=document.querySelectorAll('.node .tgl');
+    for(var i=0;i<tg.length;i++)tg[i].textContent=open?'–':'+';
+    this.textContent=open?'Tout replier':'Tout déplier';
+  });
+})();
+
+/* ---------------- clients, fournisseurs, dépôts ---------------- */
+(function(){
+  var cl=document.getElementById('clients');
+  CLIENTS.forEach(function(x){
+    var c=el('div','card'),r=el('div','rule');r.style.background=x.col;c.appendChild(r);
+    c.appendChild(el('h3',null,x.n));c.appendChild(el('p',null,x.b));
+    var sp=el('div','specs');sp.appendChild(el('span','tag pf',x.p));sp.appendChild(el('span','tag',x.q));
+    c.appendChild(sp);cl.appendChild(c);
+  });
+  var fo=document.getElementById('fourn');
+  FOURN.forEach(function(f){
+    var c=el('div','card'),h=el('h3');
+    var code=el('span','p-code',f.c);code.style.marginRight='8px';
+    h.appendChild(code);h.appendChild(el('span',null,f.n));
+    c.appendChild(h);c.appendChild(el('p',null,f.a));
+    var s=el('p',null,'Sert à : '+f.s);s.style.opacity='.8';c.appendChild(s);fo.appendChild(c);
+  });
+  var dp=document.getElementById('deps');
+  DEPOTS.forEach(function(d){
+    var c=el('div','dep-card');c.style.borderTopWidth='3px';c.style.borderTopColor=d.col;
+    var h=el('div','dep-head'),code=el('span','code','Dépôt '+d.c);code.style.color=d.col;
+    h.appendChild(code);h.appendChild(el('span','tag',d.t));c.appendChild(h);
+    var b=el('div','dep-body');b.appendChild(el('p',null,d.body));
+    var io=el('div','dep-io');io.appendChild(el('span','tag','entre par : '+d.i));io.appendChild(el('span','tag','sort vers : '+d.o));
+    b.appendChild(io);c.appendChild(b);dp.appendChild(c);
+  });
+  var ck=document.getElementById('checks');
+  CHECKS.forEach(function(x){
+    var a=el('a','check');a.href=x[1];
+    a.innerHTML='<svg width="13" height="13" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5l3.2 3.2L12 3.8" fill="none" stroke="var(--good)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    a.appendChild(el('span',null,x[0]));ck.appendChild(a);
+  });
+})();
+
+/* ---------------- thème et navigation ---------------- */
+(function(){
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var dark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+    if(window.__oleoRelight)window.__oleoRelight();
+  });
+  var prog=document.getElementById('prog');
+  var links=[].slice.call(document.querySelectorAll('nav.jump a'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function onScroll(){
+    var h=document.documentElement;
+    var pct=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);
+    prog.style.width=(pct*100).toFixed(1)+'%';
+    var best=0;
+    for(var i=0;i<secs.length;i++){if(secs[i]&&secs[i].getBoundingClientRect().top<150)best=i;}
+    links.forEach(function(a,i){if(i===best)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+
+/* ===========================================================
+   3D — fonctionnement et fabrication
+   =========================================================== */
+(function(){
+  var stageA=document.getElementById('stageA'), stageB=document.getElementById('stageB');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var stepsBox=document.getElementById('steps'), stepEls=[], activeStep=-1;
+  STEPS.forEach(function(s,i){
+    var m=modColor(s.mod);
+    var b=el('button','step-btn');b.type='button';b.style.setProperty('--c',m.color);b.setAttribute('aria-pressed','false');
+    b.appendChild(el('span','n',String(i+1)));
+    var d=el('div');
+    d.appendChild(el('h4',null,s.t));
+    d.appendChild(el('p',null,s.p));
+    d.appendChild(el('span','code',m.code+' · '+m.name));
+    b.appendChild(d);
+    b.addEventListener('click',function(){focusStep(i===activeStep?-1:i);});
+    stepsBox.appendChild(b);stepEls.push(b);
+  });
+  function focusStep(i){
+    activeStep=i;
+    stepEls.forEach(function(b,j){b.setAttribute('aria-pressed',String(j===i));});
+    if(window.__focusModule)window.__focusModule(i<0?null:STEPS[i].mod);
+  }
+
+  var infoBox=document.getElementById('levelInfo'), chipBox=document.getElementById('levelChips'), lvChips=[];
+  var infoCard=el('div','card');infoBox.appendChild(infoCard);
+  LEVELS.forEach(function(L,i){
+    var b=el('button','chip');b.type='button';b.style.setProperty('--c','var(--accent)');
+    b.setAttribute('aria-pressed','false');
+    b.appendChild(el('i'));b.appendChild(el('span',null,'Niveau '+L.n));
+    b.addEventListener('click',function(){setLevel(i);});
+    chipBox.appendChild(b);lvChips.push(b);
+  });
+  var curLevel=0;
+  function renderLevel(i){
+    var L=LEVELS[i];
+    infoCard.innerHTML='';
+    var h=el('div','n-top');
+    h.appendChild(el('span','p-code','NIVEAU '+L.n));
+    h.appendChild(el('span','tag','dépôt '+L.dep));
+    infoCard.appendChild(h);
+    infoCard.appendChild(el('h3',null,L.t));
+    infoCard.appendChild(el('p',null,L.d));
+    var o=el('p',null,'Opération : '+L.op);o.style.color='var(--accent-ink)';o.style.fontSize='13px';
+    infoCard.appendChild(o);
+    if(L.codes){
+      var cs=el('div','specs');
+      L.codes.forEach(function(c){cs.appendChild(el('span','tag',c));});
+      infoCard.appendChild(cs);
+    }
+    lvChips.forEach(function(b,j){b.setAttribute('aria-pressed',String(j===i));});
+  }
+  function setLevel(i){
+    curLevel=Math.max(0,Math.min(LEVELS.length-1,i));
+    renderLevel(curLevel);
+    if(window.__setLevel)window.__setLevel(curLevel);
+  }
+  renderLevel(0);
+  document.getElementById('prevL').addEventListener('click',function(){setLevel(curLevel-1);});
+  document.getElementById('nextL').addEventListener('click',function(){setLevel(curLevel+1);});
+
+  if(typeof THREE==='undefined'){
+    [stageA,stageB].forEach(function(s){
+      var p=el('div');
+      p.style.cssText='position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:13.5px';
+      p.textContent="La vue 3D n'a pas pu se charger. Recharge la page ; si ça persiste, les étapes et les niveaux restent décrits à côté.";
+      s.appendChild(p);
+    });
+    return;
+  }
+
+  var INOX=0xc9d2d8, OIL=0xd9a43c;
+  function mat(hex,o){o=o||{};return new THREE.MeshStandardMaterial({color:hex,metalness:o.metal!=null?o.metal:.25,roughness:o.rough!=null?o.rough:.55,transparent:o.op!=null,opacity:o.op!=null?o.op:1});}
+  function box(w,h,d){return new THREE.BoxGeometry(w,h,d);}
+  function cyl(rt,rb,h,s,open){return new THREE.CylinderGeometry(rt,rb,h,s||20,1,!!open);}
+
+  function buildStation(big){
+    var g=new THREE.Group(), gr={};
+    MODULES.forEach(function(m){var x=new THREE.Group();x.userData.key=m.id;gr[m.id]=x;g.add(x);});
+    var H=big?1.25:1.05, W=.90, D=.70, tr=big?.25:.225, th=big?.62:.50;
+    var C={};MODULES.forEach(function(m){C[m.id]=m.hex;});
+    function add(grp,geo,m,x,y,z,rot){var ms=new THREE.Mesh(geo,m);ms.position.set(x,y,z);if(rot)ms.rotation.set(rot[0]||0,rot[1]||0,rot[2]||0);grp.add(ms);return ms;}
+
+    var gB=gr.bati, steel=mat(C.bati,{metal:.45,rough:.45}), panel=mat(C.bati,{metal:.3,rough:.5,op:.13});
+    var ox=W/2-.018, oz=D/2-.018;
+    [[-ox,-oz],[ox,-oz],[-ox,oz],[ox,oz]].forEach(function(p){add(gB,box(.036,H,.036),steel,p[0],H/2,p[1]);});
+    [-oz,oz].forEach(function(z){add(gB,box(W-.04,.03,.03),steel,0,H-.02,z);add(gB,box(W-.04,.03,.03),steel,0,.05,z);});
+    [-ox,ox].forEach(function(x){add(gB,box(.03,.03,D-.04),steel,x,H-.02,0);add(gB,box(.03,.03,D-.04),steel,x,.05,0);});
+    add(gB,box(.014,H-.22,D-.07),panel,-W/2,(H-.22)/2+.12,0);
+    add(gB,box(.014,H-.22,D-.07),panel,W/2,(H-.22)/2+.12,0);
+    add(gB,box(W-.07,H-.22,.014),panel,0,(H-.22)/2+.12,-D/2);
+    add(gB,box(W-.07,.055,D-.07),mat(C.bati,{metal:.5,rough:.4}),0,.085,0);
+    var wheel=mat(0x2b3330,{metal:.2,rough:.7});
+    [[-.35,-.26],[.35,-.26],[-.35,.26],[.35,.26]].forEach(function(p){
+      add(gB,cyl(.036,.036,.026,16),wheel,p[0],.036,p[1],[0,0,Math.PI/2]);
+      add(gB,box(.03,.05,.03),steel,p[0],.07,p[1]);
+    });
+
+    var gR=gr.rec;
+    add(gR,cyl(.19,.065,.26,4),mat(C.rec,{metal:.4,rough:.45,op:.42}),.18,H-.13,0,[0,Math.PI/4,0]);
+    add(gR,box(.36,.016,.36),mat(C.rec,{metal:.35,rough:.5}),.18,H+.008,0,[0,0,-.07]);
+    add(gR,cyl(.075,.055,.09,14),mat(INOX,{metal:.7,rough:.35,op:.75}),.18,H-.20,0);
+    add(gR,cyl(.03,.03,.09,12),mat(INOX,{metal:.8,rough:.3}),.18,H-.30,0);
+
+    var gD=gr.dec;
+    add(gD,box(.40,.30,.34),mat(C.dec,{metal:.4,rough:.45,op:.38}),.20,H-.42,0);
+    add(gD,box(.37,.012,.31),mat(C.dec,{metal:.5,rough:.4}),.20,H-.55,0,[0,0,.13]);
+    add(gD,cyl(.022,.022,.09,12),mat(C.dec,{metal:.6,rough:.35}),.36,H-.56,.12,[Math.PI/2,0,0]);
+
+    var gP=gr.pomp;
+    add(gP,box(.36,.014,.26),mat(C.pomp,{metal:.5,rough:.4}),.21,H-.70,0);
+    add(gP,cyl(.055,.055,.13,18),mat(C.pomp,{metal:.6,rough:.35}),.12,H-.63,.05,[0,0,Math.PI/2]);
+    add(gP,cyl(.03,.03,.05,14),mat(0x3a443f,{metal:.7,rough:.3}),.21,H-.63,.05,[0,0,Math.PI/2]);
+    add(gP,cyl(.065,.065,.16,18),mat(0x4a5550,{metal:.5,rough:.45}),.33,H-.63,.05,[0,0,Math.PI/2]);
+    add(gP,cyl(.055,.055,.20,16),mat(C.pomp,{metal:.45,rough:.4,op:.45}),.22,H-.60,-.15);
+    add(gP,cyl(.034,.034,.14,14),mat(OIL,{metal:.2,rough:.7}),.22,H-.60,-.15);
+
+    var gS=gr.sto;
+    add(gS,cyl(tr,tr,th,30,true),mat(C.sto,{metal:.4,rough:.4,op:.3}),-.17,.12+th/2,0);
+    add(gS,cyl(tr+.006,tr+.006,.014,30),mat(C.sto,{metal:.55,rough:.35}),-.17,.12+th,0);
+    add(gS,cyl(tr+.006,tr+.006,.014,30),mat(C.sto,{metal:.55,rough:.35}),-.17,.125,0);
+    add(gS,cyl(.035,.035,.12,14),mat(INOX,{metal:.8,rough:.28}),-.17,.30,tr+.04,[Math.PI/2,0,0]);
+    add(gS,cyl(.022,.022,.07,12),mat(C.sto,{metal:.6,rough:.35}),-.30,.12+th+.04,0);
+
+    var gC=gr.cmd, leds=[];
+    add(gC,box(.24,.22,.075),mat(C.cmd,{metal:.35,rough:.5}),-.17,H-.32,D/2-.01);
+    [[0x2f8f6b,-.24],[0xd9a43c,-.17],[0xc0503f,-.10]].forEach(function(L){
+      var m=mat(L[0],{metal:.1,rough:.4});m.emissive=new THREE.Color(L[0]);m.emissiveIntensity=.12;m.userData.glow=true;
+      leds.push(add(gC,new THREE.SphereGeometry(.017,14,10),m,L[1],H-.26,D/2+.03));
+    });
+    add(gC,cyl(.03,.03,.025,14),mat(0xc0503f,{metal:.2,rough:.5}),-.17,H-.40,D/2+.03,[Math.PI/2,0,0]);
+    add(gC,cyl(.005,.005,.085,8),mat(0x2b3330,{metal:.4,rough:.5}),-.08,H-.19,D/2-.01);
+    add(gC,box(.055,.05,.055),mat(C.cmd,{metal:.4,rough:.45}),-.17,.12+th+.045,0);
+
+    var fill=new THREE.Mesh(cyl(tr-.014,tr-.014,1,26),mat(OIL,{metal:.1,rough:.25,op:.85}));
+    fill.position.set(-.17,.13,0);fill.scale.y=.001;
+    gr.sto.add(fill);
+
+    g.userData={groups:gr,H:H,tr:tr,th:th,W:W,D:D,fill:fill,leds:leds};
+    return g;
+  }
+
+  function makeScene(stage,cs){
+    var scene=new THREE.Scene();
+    var camera=new THREE.PerspectiveCamera(36,1,.05,60);
+    var renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+    stage.appendChild(renderer.domElement);
+    var hemi=new THREE.HemisphereLight(0xffffff,0x4b5550,.9);
+    var key=new THREE.DirectionalLight(0xffffff,.85);key.position.set(2.4,3.2,2.6);
+    var rim=new THREE.DirectionalLight(0xffffff,.32);rim.position.set(-2.6,1.4,-2);
+    scene.add(hemi);scene.add(key);scene.add(rim);
+    var st={scene:scene,camera:camera,renderer:renderer,hemi:hemi,key:key,
+      theta:cs.theta,phi:cs.phi,radius:cs.radius,
+      wantTheta:cs.theta,wantPhi:cs.phi,home:{theta:cs.theta,phi:cs.phi,radius:cs.radius,y:cs.y},
+      target:new THREE.Vector3(0,cs.y,0),wantTarget:new THREE.Vector3(0,cs.y,0),
+      wantRadius:cs.radius,drag:false,visible:true};
+    st.place=function(){
+      camera.position.set(
+        st.target.x+st.radius*Math.sin(st.phi)*Math.sin(st.theta),
+        st.target.y+st.radius*Math.cos(st.phi),
+        st.target.z+st.radius*Math.sin(st.phi)*Math.cos(st.theta));
+      camera.lookAt(st.target);
+    };
+    var lx=0,ly=0;
+    stage.addEventListener('pointerdown',function(e){st.drag=true;lx=e.clientX;ly=e.clientY;stage.classList.add('dragging');});
+    stage.addEventListener('pointermove',function(e){
+      if(!st.drag)return;
+      st.theta-=(e.clientX-lx)*.008;
+      st.phi=Math.max(.35,Math.min(1.6,st.phi-(e.clientY-ly)*.006));
+      st.wantTheta=st.theta;st.wantPhi=st.phi;
+      lx=e.clientX;ly=e.clientY;st.place();
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(function(ev){
+      stage.addEventListener(ev,function(){st.drag=false;stage.classList.remove('dragging');});
+    });
+    stage.addEventListener('wheel',function(e){
+      e.preventDefault();
+      st.wantRadius=Math.max(1.4,Math.min(6,st.wantRadius+(e.deltaY>0?.25:-.25)));
+    },{passive:false});
+    st.resetView=function(){
+      var two=Math.PI*2;
+      st.wantTheta=Math.round((st.theta-st.home.theta)/two)*two+st.home.theta;
+      st.wantPhi=st.home.phi;
+      st.wantRadius=st.home.radius;
+      st.wantTarget.set(0,st.home.y,0);
+    };
+    st.resize=function(){
+      var w=stage.clientWidth,h=stage.clientHeight;
+      if(!w||!h)return;
+      renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+    };
+    st.resize();st.place();
+    if(window.IntersectionObserver)new IntersectionObserver(function(es){st.visible=es[0].isIntersecting;},{threshold:.02}).observe(stage);
+    return st;
+  }
+
+  /* ---------- scène A ---------- */
+  var A=makeScene(stageA,{theta:.7,phi:1.1,radius:3,y:.62});
+  var stationA=buildStation(true);A.scene.add(stationA);
+  var UA=stationA.userData, H=UA.H, th=UA.th, tr=UA.tr, D=UA.D;
+
+  var PATH=[
+    new THREE.Vector3(.19,H+.24,.11),
+    new THREE.Vector3(.18,H+.05,.04),
+    new THREE.Vector3(.18,H-.18,0),
+    new THREE.Vector3(.18,H-.31,0),
+    new THREE.Vector3(.20,H-.46,0),
+    new THREE.Vector3(.21,H-.57,0),
+    new THREE.Vector3(.14,H-.63,.04),
+    new THREE.Vector3(.22,H-.60,-.14),
+    new THREE.Vector3(.02,H-.48,-.10),
+    new THREE.Vector3(-.17,.12+th+.06,0),
+    new THREE.Vector3(-.17,.12+th-.03,0)
+  ];
+  var SEG=[],TOT=0,si;
+  for(si=0;si<PATH.length-1;si++){var L=PATH[si].distanceTo(PATH[si+1]);SEG.push(L);TOT+=L;}
+  function pointAt(t){
+    var d=t*TOT,i=0;
+    while(i<SEG.length&&d>SEG[i]){d-=SEG[i];i++;}
+    if(i>=SEG.length)return PATH[PATH.length-1].clone();
+    return PATH[i].clone().lerp(PATH[i+1],d/SEG[i]);
+  }
+  var dropMat=mat(OIL,{metal:.15,rough:.3});
+  dropMat.emissive=new THREE.Color(OIL);dropMat.emissiveIntensity=.1;
+  var drops=[],NDROP=16,di;
+  for(di=0;di<NDROP;di++){
+    var dm=new THREE.Mesh(new THREE.SphereGeometry(.019,10,8),dropMat);
+    dm.userData.t=di/NDROP;A.scene.add(dm);drops.push(dm);
+  }
+  var jug=new THREE.Group();
+  var jb=new THREE.Mesh(cyl(.07,.085,.16,16),mat(0x8a9a95,{metal:.3,rough:.5,op:.5}));
+  jug.add(jb);jug.position.set(.20,H+.30,.17);jug.rotation.z=-.62;A.scene.add(jug);
+
+  var level=0, phase='fill', timer=0, playing=true, speed=1;
+  var ledTxt=document.getElementById('liveTxt'), ledPct=document.getElementById('livePct'), ledDot=document.getElementById('led');
+  var FOCUS={rec:[.18,H-.08,0,1.55],dec:[.20,H-.42,0,1.5],pomp:[.21,H-.63,0,1.35],sto:[-.17,.12+th/2,0,1.8],cmd:[-.17,H-.30,D/2,1.3]};
+  window.__focusModule=function(id){
+    if(!id){A.wantTarget.set(0,.62,0);A.wantRadius=3;}
+    else{var f=FOCUS[id];A.wantTarget.set(f[0],f[1],f[2]);A.wantRadius=f[3];}
+    MODULES.forEach(function(m){
+      var on=!id||id===m.id;
+      UA.groups[m.id].traverse(function(o){
+        if(!o.isMesh)return;
+        var mt=o.material;
+        if(mt.userData.op0==null)mt.userData.op0=mt.transparent?mt.opacity:1;
+        mt.transparent=true;
+        mt.opacity=on?mt.userData.op0:mt.userData.op0*.1;
+      });
+    });
+  };
+  document.getElementById('playA').addEventListener('click',function(){
+    playing=!playing;this.textContent=playing?'Pause':'Lecture';
+  });
+  document.getElementById('speedA').addEventListener('input',function(){speed=+this.value/100;});
+  document.getElementById('resetA').addEventListener('click',function(){
+    focusStep(-1);A.resetView();
+  });
+
+  function setLeds(){
+    var c=level<.6?0:level<.86?1:2;
+    UA.leds.forEach(function(m,i){m.material.emissiveIntensity=(i===c)?1.1:.07;});
+    var col=level<.6?'var(--good)':level<.86?'var(--warn)':'var(--crit)';
+    ledDot.style.background=col;
+    ledPct.textContent=Math.round(level*100)+' %';
+  }
+  function stepA(dt){
+    if(playing&&!reduce){
+      if(phase==='fill'){
+        for(var i=0;i<drops.length;i++){
+          var dp=drops[i];
+          dp.userData.t+=dt*.12*speed;
+          if(dp.userData.t>=1){dp.userData.t-=1;level=Math.min(1,level+.018);}
+          dp.position.copy(pointAt(dp.userData.t));
+          dp.visible=true;
+        }
+        if(level>=1){phase='alert';timer=0;}
+      }else if(phase==='alert'){
+        timer+=dt;
+        for(var j=0;j<drops.length;j++)drops[j].visible=false;
+        if(timer>2.6){phase='drain';timer=0;}
+      }else{
+        level=Math.max(0,level-dt*.55);
+        for(var k2=0;k2<drops.length;k2++)drops[k2].visible=false;
+        if(level<=0)phase='fill';
+      }
+    }
+    UA.fill.scale.y=Math.max(.001,level*th);
+    UA.fill.position.y=.13+level*th/2;
+    setLeds();
+    ledTxt.textContent=phase==='fill'?'La cuve se remplit':phase==='alert'?'Cuve pleine — alerte envoyée':'Le collecteur aspire';
+    jug.visible=(phase==='fill');
+  }
+
+  /* ---------- scène B ---------- */
+  var B=makeScene(stageB,{theta:.8,phi:1.02,radius:4.1,y:.26});
+  var stationB=buildStation(true);B.scene.add(stationB);
+  var UB=stationB.userData;
+  var DIR={bati:[0,0,0],rec:[0,.62,0],dec:[.72,.26,0],pomp:[.95,-.05,.35],sto:[-.95,0,0],cmd:[0,.10,.82]};
+
+  function grp(){return new THREE.Group();}
+  function layout(items){
+    var cols=Math.min(3,items.length), rows=Math.ceil(items.length/cols), sx=.76, sz=.62;
+    items.forEach(function(o,i){
+      var r=Math.floor(i/cols), c=i%cols, inRow=Math.min(cols,items.length-r*cols);
+      o.position.x=(c-(inRow-1)/2)*sx;
+      o.position.z=(r-(rows-1)/2)*sz;
+    });
+  }
+  var L4=grp(),L3=grp(),L2=grp();
+  B.scene.add(L4);B.scene.add(L3);B.scene.add(L2);
+
+  (function(){
+    var items=[],k;
+    [0x9fb0b8,0x8a9aa3,0xa8b2ad].forEach(function(col){
+      var g=grp();
+      for(k=0;k<3;k++){
+        var s=new THREE.Mesh(box(.5,.01,.34),mat(col,{metal:.75,rough:.3}));
+        s.position.y=.01+k*.014;g.add(s);
+      }
+      items.push(g);
+    });
+    var tubes=grp();
+    for(k=0;k<4;k++){var t=new THREE.Mesh(box(.86,.032,.032),mat(0x8a9aa3,{metal:.7,rough:.35}));t.position.set(0,.02+(k%2)*.036,-.05+k*.045);tubes.add(t);}
+    items.push(tubes);
+    var pot=grp();
+    var pc=new THREE.Mesh(cyl(.09,.09,.16,18),mat(0xb9770e,{metal:.3,rough:.5}));pc.position.y=.08;pot.add(pc);
+    items.push(pot);
+    var bought=grp();
+    var bp=new THREE.Mesh(cyl(.05,.05,.12,16),mat(0xc0503f,{metal:.5,rough:.4}));bp.position.set(-.1,.06,0);bp.rotation.z=Math.PI/2;bought.add(bp);
+    var bc=new THREE.Mesh(box(.14,.12,.06),mat(0x1f8fa8,{metal:.35,rough:.5}));bc.position.set(.06,.06,0);bought.add(bc);
+    var br=new THREE.Mesh(cyl(.035,.035,.025,14),mat(0x2b3330,{metal:.2,rough:.7}));br.position.set(.18,.035,.05);br.rotation.z=Math.PI/2;bought.add(br);
+    items.push(bought);
+    items.forEach(function(o){L4.add(o);});
+    layout(items);
+  })();
+
+  (function(){
+    var items=[],k;
+    var vir=grp();
+    var v=new THREE.Mesh(cyl(.25,.25,.62,30,true),mat(0x9b8ded,{metal:.6,rough:.35,op:.78}));
+    v.position.y=.31;vir.add(v);
+    var vg=new THREE.Mesh(box(.46,.008,.3),mat(0x9fb0b8,{metal:.75,rough:.3,op:.3}));
+    vg.position.set(0,.004,.3);vir.add(vg);
+    items.push(vir);
+    var sup=grp();
+    var s1=new THREE.Mesh(box(.26,.012,.2),mat(0xc0503f,{metal:.6,rough:.4}));s1.position.y=.16;sup.add(s1);
+    var s2=new THREE.Mesh(box(.012,.16,.2),mat(0xc0503f,{metal:.6,rough:.4}));s2.position.set(.13,.08,0);sup.add(s2);
+    var sg=new THREE.Mesh(box(.3,.008,.22),mat(0x8a9aa3,{metal:.75,rough:.3,op:.3}));
+    sg.position.set(0,.004,.26);sup.add(sg);
+    items.push(sup);
+    var tub=grp();
+    for(k=0;k<4;k++){var t=new THREE.Mesh(box(.032,.55,.032),mat(0x6a9fd4,{metal:.6,rough:.4,op:.45}));t.position.set(-.06+k*.045,.28,0);tub.add(t);}
+    items.push(tub);
+    var flans=grp();
+    for(k=0;k<2;k++){
+      var a=new THREE.Mesh(box(.3,.009,.26),mat(0x8a9aa3,{metal:.7,rough:.35,op:.45}));
+      a.position.set(0,.17+k*.03,0);a.rotation.z=.25;flans.add(a);
+      var b2=new THREE.Mesh(box(.009,.16,.26),mat(0x8a9aa3,{metal:.7,rough:.35,op:.45}));
+      b2.position.set(.15,.09+k*.03,0);flans.add(b2);
+    }
+    items.push(flans);
+    items.forEach(function(o){L3.add(o);});
+    layout(items);
+  })();
+
+  (function(){
+    var items=[];
+    var chas=grp(), steel=mat(0x3b6ea5,{metal:.5,rough:.42});
+    [[-.16,-.12],[.16,-.12],[-.16,.12],[.16,.12]].forEach(function(p){
+      var t=new THREE.Mesh(box(.032,.66,.032),steel);t.position.set(p[0],.33,p[1]);chas.add(t);
+    });
+    [-.12,.12].forEach(function(z){
+      [.05,.63].forEach(function(y){
+        var t=new THREE.Mesh(box(.36,.026,.026),steel);t.position.set(0,y,z);chas.add(t);
+      });
+    });
+    items.push(chas);
+    var pan=grp();
+    [0,1,2].forEach(function(i){
+      var pp=new THREE.Mesh(box(.3,.01,.24),mat(0x3b6ea5,{metal:.45,rough:.5}));
+      pp.position.set(0,.02+i*.03,i*.03);pan.add(pp);
+    });
+    items.push(pan);
+    var bac=grp();
+    var bb=new THREE.Mesh(box(.4,.06,.3),mat(0x3b6ea5,{metal:.5,rough:.45}));bb.position.y=.05;bac.add(bb);
+    items.push(bac);
+    var tre=grp();
+    var t2=new THREE.Mesh(cyl(.17,.06,.24,4),mat(0xc98a1b,{metal:.45,rough:.42,op:.82}));t2.position.y=.2;t2.rotation.y=Math.PI/4;tre.add(t2);
+    var lid=new THREE.Mesh(box(.32,.014,.32),mat(0xc98a1b,{metal:.4,rough:.5}));lid.position.y=.33;lid.rotation.z=-.07;tre.add(lid);
+    items.push(tre);
+    var pnr=grp();
+    var pb=new THREE.Mesh(cyl(.1,.08,.12,16,true),mat(0xe2a33e,{metal:.7,rough:.3,op:.75}));pb.position.y=.1;pnr.add(pb);
+    var pr=new THREE.Mesh(new THREE.TorusGeometry(.1,.008,8,20),mat(0xc9d2d8,{metal:.8,rough:.25}));
+    pr.position.y=.16;pr.rotation.x=Math.PI/2;pnr.add(pr);
+    items.push(pnr);
+    var cdec=grp();
+    var cb=new THREE.Mesh(box(.34,.26,.3),mat(0x2f8f6b,{metal:.5,rough:.4,op:.7}));cb.position.y=.17;cdec.add(cb);
+    var cf=new THREE.Mesh(box(.31,.01,.27),mat(0x2f8f6b,{metal:.6,rough:.35}));cf.position.y=.06;cf.rotation.z=.13;cdec.add(cf);
+    items.push(cdec);
+    var gmp=grp();
+    var pl=new THREE.Mesh(box(.32,.014,.22),mat(0xc0503f,{metal:.5,rough:.4}));pl.position.y=.04;gmp.add(pl);
+    var pp2=new THREE.Mesh(cyl(.05,.05,.12,18),mat(0xc0503f,{metal:.6,rough:.35}));pp2.position.set(-.08,.1,0);pp2.rotation.z=Math.PI/2;gmp.add(pp2);
+    var mm=new THREE.Mesh(cyl(.06,.06,.15,18),mat(0x4a5550,{metal:.5,rough:.45}));mm.position.set(.11,.1,0);mm.rotation.z=Math.PI/2;gmp.add(mm);
+    var ac=new THREE.Mesh(cyl(.028,.028,.05,14),mat(0x3a443f,{metal:.7,rough:.3}));ac.position.set(.02,.1,0);ac.rotation.z=Math.PI/2;gmp.add(ac);
+    items.push(gmp);
+    var cuve=grp();
+    var cc=new THREE.Mesh(cyl(.25,.25,.62,30),mat(0x6b5bbd,{metal:.5,rough:.38,op:.78}));cc.position.y=.33;cuve.add(cc);
+    items.push(cuve);
+    items=[cuve,chas,tre,cdec,gmp,pnr,pan,bac];
+    items.forEach(function(o){L2.add(o);});
+    layout(items);
+  })();
+
+  [L4,L3,L2].forEach(function(g){g.traverse(function(o){if(o.isMesh)o.material.userData.op0=o.material.transparent?o.material.opacity:1;});});
+  stationB.traverse(function(o){if(o.isMesh)o.material.userData.op0=o.material.transparent?o.material.opacity:1;});
+
+  var levelAlpha=[1,0,0,0,0], wantAlpha=[1,0,0,0,0], explodeB=1, wantExplode=1;
+  function setAlpha(g,a){
+    g.visible=a>.012;
+    g.traverse(function(o){
+      if(o.isMesh){o.material.transparent=true;o.material.opacity=(o.material.userData.op0!=null?o.material.userData.op0:1)*a;}
+    });
+  }
+  window.__setLevel=function(i){
+    wantAlpha=[0,0,0,0,0];wantAlpha[i]=1;
+    wantExplode=(i===4)?0:1;
+    if(i<=2){B.wantTarget.set(0,.26,0);B.wantRadius=4.1;}
+    else if(i===3){B.wantTarget.set(0,.62,0);B.wantRadius=3.5;}
+    else {B.wantTarget.set(0,.6,0);B.wantRadius=2.9;}
+  };
+  function stepB(dt){
+    var k=Math.min(1,dt*3.4),i;
+    for(i=0;i<5;i++)levelAlpha[i]+=(wantAlpha[i]-levelAlpha[i])*k;
+    setAlpha(L4,levelAlpha[0]);setAlpha(L3,levelAlpha[1]);setAlpha(L2,levelAlpha[2]);
+    var sa=Math.max(levelAlpha[3],levelAlpha[4]);
+    stationB.visible=sa>.012;
+    stationB.traverse(function(o){
+      if(o.isMesh){o.material.transparent=true;o.material.opacity=(o.material.userData.op0!=null?o.material.userData.op0:1)*sa;}
+    });
+    explodeB+=(wantExplode-explodeB)*k;
+    MODULES.forEach(function(m){
+      var d=DIR[m.id];
+      UB.groups[m.id].position.set(d[0]*explodeB*.55,d[1]*explodeB*.55,d[2]*explodeB*.55);
+    });
+    UB.fill.scale.y=.001;
+  }
+  window.__setLevel(0);
+
+  var autoPlay=false, autoT=0;
+  document.getElementById('autoL').addEventListener('click',function(){
+    autoPlay=!autoPlay;this.textContent=autoPlay?'Arrêter':'Lecture auto';autoT=0;
+  });
+
+  window.__oleoRelight=function(){
+    var dark=document.documentElement.getAttribute('data-theme')==='dark'||
+      (!document.documentElement.getAttribute('data-theme')&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+    [A,B].forEach(function(S){
+      S.hemi.groundColor=new THREE.Color(dark?0x1a211e:0x6b7570);
+      S.hemi.intensity=dark?.78:.92;S.key.intensity=dark?.95:.85;
+    });
+  };
+  window.addEventListener('resize',function(){A.resize();B.resize();A.place();B.place();});
+  window.__oleoRelight();
+
+  var last=performance.now();
+  (function loop(now){
+    requestAnimationFrame(loop);
+    var dt=Math.min(.05,(now-last)/1000);last=now;
+    [A,B].forEach(function(S){
+      var k=Math.min(1,dt*3);
+      S.target.lerp(S.wantTarget,k);
+      S.radius+=(S.wantRadius-S.radius)*k;
+      if(!S.drag&&!reduce&&S.visible){S.theta+=dt*.08;S.wantTheta+=dt*.08;}
+      S.theta+=(S.wantTheta-S.theta)*k;
+      S.phi+=(S.wantPhi-S.phi)*k;
+      S.place();
+    });
+    if(A.visible){stepA(dt);A.renderer.render(A.scene,A.camera);}
+    if(B.visible){
+      if(autoPlay&&!reduce){autoT+=dt;if(autoT>2.4){autoT=0;setLevel((curLevel+1)%LEVELS.length);}}
+      stepB(dt);B.renderer.render(B.scene,B.camera);
+    }
+  })(last);
+})();
+</script>
+
+</body></html>
